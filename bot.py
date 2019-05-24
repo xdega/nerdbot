@@ -15,9 +15,9 @@ async def on_ready():
     print('------')
     await client.change_presence(game=discord.Game(name="101010"))
 
-client.run(TOKEN)
-
 @client.command(pass_context = True)
 async def roll(ctx):
     num = randint(1,100)
     await client.say(ctx.message.author.mention + ' rolled ' + num)
+
+client.run(TOKEN)
