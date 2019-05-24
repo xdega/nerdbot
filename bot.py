@@ -18,6 +18,7 @@ async def on_ready():
 @client.command(pass_context = True)
 async def roll(ctx):
     num = randint(1,100)
+    num = str(num)
     await client.say(ctx.message.author.mention + ' rolled ' + num)
 
 client.run(TOKEN)
