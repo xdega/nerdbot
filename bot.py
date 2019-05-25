@@ -13,9 +13,12 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
-    await client.change_presence(game=discord.Game(name="101010"))
+    await client.change_presence(game=discord.Game(name="101010 >help"))
 
 @client.command(pass_context = True)
+async def commands(ctx):
+    await ctx.author.send('Hey there! You need help?')
+
 async def roll(ctx):
     num = randint(1,100)
     num = str(num)
