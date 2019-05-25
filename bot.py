@@ -20,7 +20,12 @@ client.remove_command('help')
 
 @client.command(pass_context = True)
 async def help(ctx):
-    await client.send_message(ctx.message.author,'Hey there! You need help?')
+    message = """
+    Hey there! You need help? Here are the commands I respond to:
+    ** >help ** - I will whisper you this help message
+    ** >roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
+    """
+    await client.send_message(ctx.message.author, message)
 
 @client.command(pass_context = True)
 async def roll(ctx):
