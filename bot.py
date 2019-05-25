@@ -45,7 +45,8 @@ async def io(region, realm, player):
     url +="&fields=mythic_plus_scores_by_season:current"
     response = requests.get(url)
     response = response.json()
-    score = response['mythic_plus_scores_by_season']['scores']['all']
+    print(response)
+    score = response['mythic_plus_scores_by_season'][0]['scores']['all']
     await client.say('**Raider IO score for '+ player + ':** ' + score)
 
 @client.command(pass_context = True)
