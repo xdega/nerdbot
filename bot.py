@@ -20,9 +20,7 @@ client.remove_command('help')
 
 @client.command(pass_context = True)
 async def help(ctx):
-    context = dir(ctx)
-    print(context)
-    await ctx.message.author.send('Hey there! You need help?')
+    await client.send_message(ctx.message.author,'Hey there! You need help?')
 
 @client.command(pass_context = True)
 async def roll(ctx):
