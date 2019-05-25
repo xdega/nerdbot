@@ -1,4 +1,5 @@
 import os, discord
+import requests
 from random import randint
 from discord.ext.commands import Bot
 
@@ -27,6 +28,13 @@ Here are the commands I respond to:
 ** >roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
     """
     await client.send_message(ctx.message.author, message)
+
+@client.command()
+async def affix():
+    response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
+    response = response.json()
+    affixes = response['title']
+    await client.say('**Current Mythic+ Affixes (US):**' + affixes)
 
 @client.command(pass_context = True)
 async def roll(ctx):
