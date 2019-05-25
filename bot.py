@@ -34,7 +34,18 @@ async def affix():
     response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
     response = response.json()
     affixes = response['title']
-    await client.say('**Current Mythic+ Affixes (US):**' + affixes)
+    await client.say('**Current Mythic+ Affixes (US):** ' + affixes)
+
+async def io(region, realm, player):
+    url = "https://raider.io/api/v1/characters/profile"
+    url +="?region=" + region
+    url +="&realm=" + realm
+    url +="&name=" + player
+    url +="&fields=mythic_plus_scores_by_season:current"
+    response = requests.get(url)
+    response = response.json()
+    score = response['mythic_plus_scores_by_season']['scores']['all']
+    await client.say('**Raider IO score for '+ player + ':** ' + score)
 
 @client.command(pass_context = True)
 async def roll(ctx):
