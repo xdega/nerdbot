@@ -36,6 +36,7 @@ async def affix():
     affixes = response['title']
     await client.say('**Current Mythic+ Affixes (US):** ' + affixes)
 
+@client.command()
 async def io(region, realm, player):
     url = "https://raider.io/api/v1/characters/profile"
     url +="?region=" + region
