@@ -15,10 +15,15 @@ async def on_ready():
     print('------')
     await client.change_presence(game=discord.Game(name="101010 >help"))
 
-@client.command(pass_context = True)
-async def commands(ctx):
-    await ctx.author.send('Hey there! You need help?')
+# Remove default help command
+client.remove_command('help')
 
+@client.command(pass_context = True)
+async def help(ctx):
+    print(ctx)
+    await ctx.messge.author.send('Hey there! You need help?')
+
+@client.command(pass_context = True)
 async def roll(ctx):
     num = randint(1,100)
     num = str(num)
