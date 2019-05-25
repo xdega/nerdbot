@@ -38,14 +38,20 @@ async def affix():
 
 @client.command()
 async def io(region, realm, player):
+    # Ensure proper formatting of params
+    region = region.lower()
+    realm = realm.lower()
+    player = player.capitalize()
+
+    # Build request URL
     url = "https://raider.io/api/v1/characters/profile"
     url +="?region=" + region
     url +="&realm=" + realm
     url +="&name=" + player
     url +="&fields=mythic_plus_scores_by_season:current"
+
     response = requests.get(url)
     response = response.json()
-    print(response)
     score = response['mythic_plus_scores_by_season'][0]['scores']['all']
     score = str(score)
     await client.say('**Raider IO score for '+ player + ':** ' + score)
