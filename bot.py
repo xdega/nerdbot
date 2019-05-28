@@ -5,6 +5,7 @@ from discord.ext.commands import Bot
 
 BOT_PREFIX = os.environ['discord_prefix']
 TOKEN = os.environ['discord_token']
+WEATHER_API_KEY = os.environ['open_weather_map_key']
 
 client = Bot(command_prefix=BOT_PREFIX)
 
@@ -28,6 +29,21 @@ Here are the commands I respond to:
 ** >roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
     """
     await client.send_message(ctx.message.author, message)
+
+@client.command()
+async def weather(zipcode, country=''):
+    url = 'api.openweathermap.org/data/2.5/weather?'
+    url += 'zip=' + zipcode
+    if(country) url += ',' + country
+    url += '&appid=' + WEATHER_API_KEY
+
+    response = requests.get(url)
+    response = response.json()
+
+    forecast = response['weather']['description']
+    station = response['name']
+
+    await client.say('**The Weather for ' + station + ': **' + forecast)
 
 @client.command()
 async def affix():
