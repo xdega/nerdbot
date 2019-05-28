@@ -40,7 +40,7 @@ async def weather(zipcode, country=''):
     response = requests.get(url)
     response = response.json()
 
-    forecast = response['weather']['description']
+    forecast = response['weather'][0]['description']
     station = response['name']
 
     await client.say('**The Weather for ' + station + ': **' + forecast)
