@@ -50,7 +50,7 @@ async def weather(zipcode):
     print(response)
 
     forecast = response['weather'][0]['description']
-    forecast = capitalize(forecast)
+    forecast = forecast.capitalize()
     code = response['weather'][0]['id']
     station = response['name']
 
