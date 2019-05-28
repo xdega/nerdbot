@@ -32,7 +32,7 @@ Here are the commands I respond to:
 
 @client.command()
 async def weather(zipcode, country=''):
-    url = 'api.openweathermap.org/data/2.5/weather?'
+    url = 'https://api.openweathermap.org/data/2.5/weather?'
     url += 'zip=' + zipcode
     if(country != ''): url += ',' + country
     url += '&appid=' + WEATHER_API_KEY
