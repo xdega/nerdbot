@@ -50,11 +50,11 @@ async def weather(zipcode):
     print(response)
 
     forecast = response['weather'][0]['description']
-    forecast = forecast.capitalize()
+    forecast = forecast.title()
     code = response['weather'][0]['id']
     station = response['name']
 
-    if code > 800:
+    if code > int(800):
         code = int(str(code)[:1])
         emojistr = {
             2: ':thunder_cloud_rain: :fearful:',
