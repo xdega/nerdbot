@@ -47,21 +47,26 @@ async def weather(zipcode):
     response = requests.get(url)
     response = response.json()
 
+    print(response.body)
+
     weather_data = response['weather'][0]['description']
     forecast = weather_data['description']
     station = response['name']
 
     code = weather_data['id']
-    code = int(str(code)[:1])
-    emojistr = {
-        2: ':thunder_cloud_rain: :fearful:',
-        3: ':white_sun_rain_cloud:',
-        5: ':cloud_rain: :frown:',
-        6: ':cloud_snow: :snowflake: :snowman:',
-        7: ':foggy: :eyeglasses:',
-        8: ':white_sun_small_cloud: :sunny: :fire:'
-    }
-    emojistr = emojistr.get(code, '')
+    if code >= 801:
+        code = int(str(code)[:1])
+        emojistr = {
+            2: ':thunder_cloud_rain: :fearful:',
+            3: ':white_sun_rain_cloud:',
+            5: ':cloud_rain: :frown:',
+            6: ':cloud_snow: :snowflake: :snowman:',
+            7: ':foggy: :eyeglasses:',
+            8: ':white_sun_small_cloud: :sunny: :fire:'
+        }
+        emojistr = emojistr.get(code, '')
+    else:
+        emojistr = ':cloud: :cloud: :cloud:'
 
     await CLIENT.say('**The Weather for ' + station + 'is: **' + forecast + ' ' + emojistr)
 
