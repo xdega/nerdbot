@@ -1,6 +1,11 @@
+""" Discord Bot, with a collection of various nerdy commands. """
+# System imports
 import os
-import requests
 from random import randint
+
+# External packages (pip)
+import requests
+import discord
 from discord.ext.commands import Bot
 
 BOT_PREFIX = os.environ['discord_prefix']
