@@ -37,13 +37,28 @@ async def weather(zipcode, country=''):
     if(country != ''): url += ',' + country
     url += '&appid=' + WEATHER_API_KEY
 
+    int(str(number)[:2])
+
     response = requests.get(url)
     response = response.json()
 
-    forecast = response['weather'][0]['description']
+    weather = response['weather'][0]['description']
+    forecast = weather['description']
     station = response['name']
 
-    await client.say('**The Weather for ' + station + ': **' + forecast)
+    code = weather['id']
+    code = int(str(code)[:1])
+    emojistr = {
+        2: ':thunder_cloud_rain: :fearful:'
+        3: ':white_sun_rain_cloud:',
+        5: ':cloud_rain: :frown:',
+        6: ':cloud_snow: :snowflake: :snowman:',
+        7: ':foggy: :eyeglasses:',
+        8: ':white_sun_small_cloud: :sunny: :fire:'
+    }
+    emojistr = emojistr.get(code, '')
+
+    await client.say('**The Weather for ' + station + 'is: **' + forecast + ' ' + emojistr)
 
 @client.command()
 async def affix():
