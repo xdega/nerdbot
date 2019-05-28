@@ -11,6 +11,7 @@ from discord.ext.commands import Bot
 BOT_PREFIX = os.environ['discord_prefix']
 TOKEN = os.environ['discord_token']
 WEATHER_API_KEY = os.environ['open_weather_map_key']
+NASA_API_KEY = os.environ['nasa_api_key']
 
 CLIENT = Bot(command_prefix=BOT_PREFIX)
 
@@ -39,6 +40,16 @@ Here are the commands I respond to:
 ** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
     """
     await CLIENT.send_message(ctx.message.author, message)
+
+@CLIENT.command()
+async def nasa_apod():
+    """ Sends a beautiful space picture of the day from NASA """
+    url = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY
+    response = requests.get(url)
+    photo = response['url']
+    title = response['title']
+
+    await CLIENT.message.channel.send('*** Description: ***' + title + "\n" + photo)
 
 @CLIENT.command()
 async def weather(zipcode):
