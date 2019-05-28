@@ -22,7 +22,7 @@ async def on_ready():
     print(CLIENT.user.name)
     print(CLIENT.user.id)
     print('------')
-    await CLIENT.change_presence(game=discord.Game(name=BOT_PREFIX + 'help'))
+    await CLIENT.change_presence(game=discord.Game(name=BOT_PREFIX + 'help', type=3))
 
 # Remove default help command
 CLIENT.remove_command('help')
@@ -46,9 +46,9 @@ async def prefix(ctx, value):
     """ Allows server administrators to change the bot prefix """
     if ctx.message.author.server_permissions.administrator:
         os.environ['discord_bot_prefix'] = value
-        helpstr = value + 'help'
+        helpstr = os.environ['discord_bot_prefix'] + 'help'
 
-        await CLIENT.change_presence(game=discord.Game(name=helpstr))
+        await CLIENT.change_presence(game=discord.Game(name=helpstr, type=3))
     else:
         await CLIENT.send_message(ctx.message.author, 'You cannot run this command, sorry!')
 
