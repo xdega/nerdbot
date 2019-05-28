@@ -46,6 +46,8 @@ async def nasa_apod():
     """ Sends a beautiful space picture of the day from NASA """
     url = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY
     response = requests.get(url)
+    response = response.json()
+
     photo = response['url']
     title = response['title']
 
