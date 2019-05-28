@@ -48,6 +48,8 @@ async def nasa_apod():
     response = requests.get(url)
     response = response.json()
 
+    print(response)
+
     photo = response['url']
     title = response['title']
 
