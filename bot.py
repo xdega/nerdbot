@@ -49,7 +49,7 @@ async def weather(zipcode, country=''):
     code = weather['id']
     code = int(str(code)[:1])
     emojistr = {
-        2: ':thunder_cloud_rain: :fearful:'
+        2: ':thunder_cloud_rain: :fearful:',
         3: ':white_sun_rain_cloud:',
         5: ':cloud_rain: :frown:',
         6: ':cloud_snow: :snowflake: :snowman:',
