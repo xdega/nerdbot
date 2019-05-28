@@ -53,7 +53,7 @@ async def nasa_apod():
     photo = response['url']
     title = response['title']
 
-    await CLIENT.say('*** Description: ***' + title + "\n" + photo)
+    await CLIENT.say('** Description: **' + title + "\n" + photo)
 
 @CLIENT.command()
 async def weather(zipcode):
