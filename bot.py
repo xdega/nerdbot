@@ -50,10 +50,11 @@ async def weather(zipcode):
     print(response)
 
     forecast = response['weather'][0]['description']
+    forecast = capitalize(forecast)
     code = response['weather'][0]['id']
     station = response['name']
 
-    if code >= 801:
+    if code > 800:
         code = int(str(code)[:1])
         emojistr = {
             2: ':thunder_cloud_rain: :fearful:',
@@ -65,9 +66,9 @@ async def weather(zipcode):
         }
         emojistr = emojistr.get(code, '')
     else:
-        emojistr = ':cloud: :cloud: :cloud:'
+        emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
 
-    await CLIENT.say('**The Weather for ' + station + 'is: **' + forecast + ' ' + emojistr)
+    await CLIENT.say('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
 
 @CLIENT.command()
 async def affix():
