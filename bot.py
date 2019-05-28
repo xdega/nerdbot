@@ -22,7 +22,7 @@ async def on_ready():
     print(CLIENT.user.name)
     print(CLIENT.user.id)
     print('------')
-    await CLIENT.change_presence(game=discord.Game(name="101010 >help"))
+    await CLIENT.change_presence(game=discord.Game(name=BOT_PREFIX + 'help'))
 
 # Remove default help command
 CLIENT.remove_command('help')
@@ -40,6 +40,15 @@ Here are the commands I respond to:
 ** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
     """
     await CLIENT.send_message(ctx.message.author, message)
+
+@CLIENT.command(pass_context=True)
+async def prefix(ctx, value):
+    """ Allows server administrators to change the bot prefix """
+    if ctx.message.author.server_permissions.administrator:
+        os.environ['discord_bot_prefix'] = value
+        await CLIENT.change_presence(game=discord.Game(name=prefix + 'help'))
+    else:
+        await CLIENT.send_message(ctx.message.author, 'You cannot run this command, sorry!')
 
 @CLIENT.command()
 async def nasa_apod():
