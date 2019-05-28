@@ -34,6 +34,9 @@ Hey there! You need help?
 Here are the commands I respond to:
 ** >help ** - I will whisper you this help message
 ** >roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
+** >affixes ** - Will tell you what shitty M+ affixes you have to deal with.
+** >io [region] [realm] [player] ** - Announce size of 'epeen' (RaiderIO score).
+** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
     """
     await CLIENT.send_message(ctx.message.author, message)
 
