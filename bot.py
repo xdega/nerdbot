@@ -47,7 +47,7 @@ async def weather(zipcode):
     response = requests.get(url)
     response = response.json()
 
-    print(response.body)
+    print(response)
 
     weather_data = response['weather'][0]['description']
     forecast = weather_data['description']
