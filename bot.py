@@ -6,14 +6,14 @@ from random import randint
 # External packages (pip)
 import requests
 import discord
-from discord.ext.commands import Bot
+from discord.ext import commands
 
 BOT_PREFIX = os.environ['discord_prefix']
 TOKEN = os.environ['discord_token']
 WEATHER_API_KEY = os.environ['open_weather_map_key']
 NASA_API_KEY = os.environ['nasa_api_key']
 
-bot = Bot(command_prefix=BOT_PREFIX)
+bot = commands.Bot(command_prefix=BOT_PREFIX)
 
 @bot.event
 async def on_ready():
@@ -39,7 +39,7 @@ Here are the commands I respond to:
 ** >io [region] [realm] [player] ** - Announce size of 'epeen' (RaiderIO score).
 ** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
     """
-    await bot.send_message(ctx.message.author, message)
+    await ctx.send(message)
 
 @bot.command(pass_context=True)
 async def prefix(ctx, value):
@@ -50,9 +50,9 @@ async def prefix(ctx, value):
 
         await bot.change_presence(game=discord.Game(name=helpstr, type=3))
     else:
-        await bot.send_message(ctx.message.author, 'You cannot run this command, sorry!')
+        await ctx.send('You cannot run this command, sorry!')
 
-@bot.command()
+@bot.command(pass_context=True)
 async def nasa_apod():
     """ Sends a beautiful space picture of the day from NASA """
     url = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY
@@ -64,9 +64,9 @@ async def nasa_apod():
     photo = response['url']
     title = response['title']
 
-    await bot.say('** Description: **' + title + "\n" + photo)
+    await ctx.send('** Description: **' + title + "\n" + photo)
 
-@bot.command()
+@bot.command(pass_context=True)
 async def weather(zipcode):
     """ Gets the current weather for given US zip code """
     url = 'https://api.openweathermap.org/data/2.5/weather?'
@@ -97,17 +97,17 @@ async def weather(zipcode):
     else:
         emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
 
-    await bot.say('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
+    await ctx.send('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
 
-@bot.command()
+@bot.command(pass_context=True)
 async def affix():
     """ Gets the current Mythic+ affixes """
     response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
     response = response.json()
     affixes = response['title']
-    await bot.say('**Current Mythic+ Affixes (US):** ' + affixes)
+    await ctx.send('**Current Mythic+ Affixes (US):** ' + affixes)
 
-@bot.command()
+@bot.command(pass_context=True)
 async def io(region, realm, player):
     """ Gets the Raider IO score for region, realm, player """
     # Ensure proper formatting of params
@@ -126,13 +126,13 @@ async def io(region, realm, player):
     response = response.json()
     score = response['mythic_plus_scores_by_season'][0]['scores']['all']
     score = str(score)
-    await bot.say('**Raider IO score for '+ player + ':** ' + score)
+    await ctx.send('**Raider IO score for '+ player + ':** ' + score)
 
 @bot.command(pass_context=True)
 async def roll(ctx):
     """ Rolls a pseudorandom number from 0 to 100 """
     num = randint(0, 100)
     num = str(num)
-    await bot.say(ctx.message.author.mention + ' rolled ' + num)
+    await ctx.send(ctx.message.author.mention + ' rolled ' + num)
 
 bot.run(TOKEN)
