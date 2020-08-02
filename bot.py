@@ -100,7 +100,7 @@ async def weather(ctx, zipcode):
     await ctx.send('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
 
 @bot.command(pass_context=True)
-async def affix(ctx):
+async def affixes(ctx):
     """ Gets the current Mythic+ affixes """
     response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
     response = response.json()
