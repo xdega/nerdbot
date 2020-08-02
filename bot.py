@@ -53,7 +53,7 @@ async def prefix(ctx, value):
         await ctx.send('You cannot run this command, sorry!')
 
 @bot.command(pass_context=True)
-async def nasa_apod():
+async def nasa_apod(ctx):
     """ Sends a beautiful space picture of the day from NASA """
     url = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY
     response = requests.get(url)
@@ -67,7 +67,7 @@ async def nasa_apod():
     await ctx.send('** Description: **' + title + "\n" + photo)
 
 @bot.command(pass_context=True)
-async def weather(zipcode):
+async def weather(ctx, zipcode):
     """ Gets the current weather for given US zip code """
     url = 'https://api.openweathermap.org/data/2.5/weather?'
     url += 'zip=' + zipcode
@@ -100,7 +100,7 @@ async def weather(zipcode):
     await ctx.send('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
 
 @bot.command(pass_context=True)
-async def affix():
+async def affix(ctx):
     """ Gets the current Mythic+ affixes """
     response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
     response = response.json()
@@ -108,7 +108,7 @@ async def affix():
     await ctx.send('**Current Mythic+ Affixes (US):** ' + affixes)
 
 @bot.command(pass_context=True)
-async def io(region, realm, player):
+async def io(ctx, region, realm, player):
     """ Gets the Raider IO score for region, realm, player """
     # Ensure proper formatting of params
     region = region.lower()
