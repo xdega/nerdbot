@@ -13,21 +13,21 @@ TOKEN = os.environ['discord_token']
 WEATHER_API_KEY = os.environ['open_weather_map_key']
 NASA_API_KEY = os.environ['nasa_api_key']
 
-CLIENT = Bot(command_prefix=BOT_PREFIX)
+bot = Bot(command_prefix=BOT_PREFIX)
 
-@CLIENT.event
+@bot.event
 async def on_ready():
     """ Startup Procedure """
     print('Logged in as')
-    print(CLIENT.user.name)
-    print(CLIENT.user.id)
+    print(bot.user.name)
+    print(bot.user.id)
     print('------')
-    await CLIENT.change_presence(game=discord.Game(name=BOT_PREFIX + 'help', type=3))
+    await bot.change_presence(game=discord.Game(name=BOT_PREFIX + 'help', type=3))
 
 # Remove default help command
-CLIENT.remove_command('help')
+bot.remove_command('help')
 
-@CLIENT.command(pass_context=True)
+@bot.command(pass_context=True)
 async def help(ctx):
     """ Sends help message to the user, informing of available commands """
     message = """
@@ -39,20 +39,20 @@ Here are the commands I respond to:
 ** >io [region] [realm] [player] ** - Announce size of 'epeen' (RaiderIO score).
 ** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
     """
-    await CLIENT.send_message(ctx.message.author, message)
+    await bot.send_message(ctx.message.author, message)
 
-@CLIENT.command(pass_context=True)
+@bot.command(pass_context=True)
 async def prefix(ctx, value):
     """ Allows server administrators to change the bot prefix """
     if ctx.message.author.server_permissions.administrator:
         os.environ['discord_bot_prefix'] = value
         helpstr = os.environ['discord_bot_prefix'] + 'help'
 
-        await CLIENT.change_presence(game=discord.Game(name=helpstr, type=3))
+        await bot.change_presence(game=discord.Game(name=helpstr, type=3))
     else:
-        await CLIENT.send_message(ctx.message.author, 'You cannot run this command, sorry!')
+        await bot.send_message(ctx.message.author, 'You cannot run this command, sorry!')
 
-@CLIENT.command()
+@bot.command()
 async def nasa_apod():
     """ Sends a beautiful space picture of the day from NASA """
     url = 'https://api.nasa.gov/planetary/apod?api_key=' + NASA_API_KEY
@@ -64,9 +64,9 @@ async def nasa_apod():
     photo = response['url']
     title = response['title']
 
-    await CLIENT.say('** Description: **' + title + "\n" + photo)
+    await bot.say('** Description: **' + title + "\n" + photo)
 
-@CLIENT.command()
+@bot.command()
 async def weather(zipcode):
     """ Gets the current weather for given US zip code """
     url = 'https://api.openweathermap.org/data/2.5/weather?'
@@ -97,17 +97,17 @@ async def weather(zipcode):
     else:
         emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
 
-    await CLIENT.say('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
+    await bot.say('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
 
-@CLIENT.command()
+@bot.command()
 async def affix():
     """ Gets the current Mythic+ affixes """
     response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
     response = response.json()
     affixes = response['title']
-    await CLIENT.say('**Current Mythic+ Affixes (US):** ' + affixes)
+    await bot.say('**Current Mythic+ Affixes (US):** ' + affixes)
 
-@CLIENT.command()
+@bot.command()
 async def io(region, realm, player):
     """ Gets the Raider IO score for region, realm, player """
     # Ensure proper formatting of params
@@ -126,13 +126,13 @@ async def io(region, realm, player):
     response = response.json()
     score = response['mythic_plus_scores_by_season'][0]['scores']['all']
     score = str(score)
-    await CLIENT.say('**Raider IO score for '+ player + ':** ' + score)
+    await bot.say('**Raider IO score for '+ player + ':** ' + score)
 
-@CLIENT.command(pass_context=True)
+@bot.command(pass_context=True)
 async def roll(ctx):
     """ Rolls a pseudorandom number from 0 to 100 """
     num = randint(0, 100)
     num = str(num)
-    await CLIENT.say(ctx.message.author.mention + ' rolled ' + num)
+    await bot.say(ctx.message.author.mention + ' rolled ' + num)
 
-CLIENT.run(TOKEN)
+bot.run(TOKEN)
