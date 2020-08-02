@@ -22,7 +22,8 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-    await bot.change_presence(game=discord.Game(name=BOT_PREFIX + 'help', type=3))
+    activity = discord.Game(name=BOT_PREFIX + 'help', type=3)
+    await bot.change_presence(status=discord.Status.idle, activity=activity)
 
 # Remove default help command
 bot.remove_command('help')
