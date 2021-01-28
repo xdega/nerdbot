@@ -34,9 +34,9 @@ async def help(ctx):
     message = """
 Hey there! You need help?
 Here are the commands I respond to:
-** >help ** - I will whisper you this help message.
-** >roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
-** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
+** help ** - I will whisper you this help message.
+** roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
+** weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
 ** nasa_apod ** - Displays the Astral Photo of the Day, provided by the NASA API.
     """
     await ctx.send(message)
