@@ -34,11 +34,10 @@ async def help(ctx):
     message = """
 Hey there! You need help?
 Here are the commands I respond to:
-** >help ** - I will whisper you this help message
+** >help ** - I will whisper you this help message.
 ** >roll ** - Nothing unique. I'll just roll a dice from 1-100. Good Luck!
-** >affixes ** - Will tell you what shitty M+ affixes you have to deal with.
-** >io [region] [realm] [player] ** - Announce size of 'epeen' (RaiderIO score).
 ** >weather [zip code] ** - Let you know the weather for zipcode, so you don't have to go outside.
+** nasa_apod ** - Displays the Astral Photo of the Day, provided by the NASA API.
     """
     await ctx.send(message)
 
@@ -99,35 +98,6 @@ async def weather(ctx, zipcode):
         emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
 
     await ctx.send('**The Weather for ' + station + ' is: **' + forecast + ' ' + emojistr)
-
-@bot.command(pass_context=True)
-async def affixes(ctx):
-    """ Gets the current Mythic+ affixes """
-    response = requests.get("https://raider.io/api/v1/mythic-plus/affixes?region=us&locale=en")
-    response = response.json()
-    affixes = response['title']
-    await ctx.send('**Current Mythic+ Affixes (US):** ' + affixes)
-
-@bot.command(pass_context=True)
-async def io(ctx, region, realm, player):
-    """ Gets the Raider IO score for region, realm, player """
-    # Ensure proper formatting of params
-    region = region.lower()
-    realm = realm.lower()
-    player = player.capitalize()
-
-    # Build request URL
-    url = "https://raider.io/api/v1/characters/profile"
-    url += "?region=" + region
-    url += "&realm=" + realm
-    url += "&name=" + player
-    url += "&fields=mythic_plus_scores_by_season:current"
-
-    response = requests.get(url)
-    response = response.json()
-    score = response['mythic_plus_scores_by_season'][0]['scores']['all']
-    score = str(score)
-    await ctx.send('**Raider IO score for '+ player + ':** ' + score)
 
 @bot.command(pass_context=True)
 async def roll(ctx):
