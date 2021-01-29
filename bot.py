@@ -8,12 +8,16 @@ import requests
 import discord
 from discord.ext import commands
 
+
 BOT_PREFIX = os.environ['discord_prefix']
 TOKEN = os.environ['discord_token']
 WEATHER_API_KEY = os.environ['open_weather_map_key']
 NASA_API_KEY = os.environ['nasa_api_key']
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
+
+# Remove default help command
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
@@ -25,5 +29,9 @@ async def on_ready():
     activity = discord.Game(name=BOT_PREFIX + 'help', type=discord.ActivityType.watching)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
+# commands
+for file in os.listdir('commands'):
+    @bot.command(pass_context=True)
+    exec(f"commands/{file}")
 
 bot.run(TOKEN)

@@ -1,7 +1,3 @@
-# Remove default help command
-bot.remove_command('help')
-
-@bot.command(pass_context=True)
 async def help(ctx):
     """ Sends help message to the user, informing of available commands """
     message = """

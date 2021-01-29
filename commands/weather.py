@@ -1,4 +1,3 @@
-@bot.command(pass_context=True)
 async def weather(ctx, zipcode):
     """ Gets the current weather for given US zip code """
     url = 'https://api.openweathermap.org/data/2.5/weather?'
