@@ -45,8 +45,8 @@ Here are the commands I respond to:
 async def prefix(ctx, value):
     """ Allows server administrators to change the bot prefix """
     if ctx.message.author.server_permissions.administrator:
-        os.environ['discord_bot_prefix'] = value
-        helpstr = os.environ['discord_bot_prefix'] + 'help'
+        os.environ['discord_prefix'] = value
+        helpstr = os.environ['discord_prefix'] + 'help'
 
         await bot.change_presence(game=discord.Game(name=helpstr, type=3))
     else:
