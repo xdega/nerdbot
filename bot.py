@@ -9,10 +9,10 @@ import discord
 from discord.ext import commands
 
 
-BOT_PREFIX = os.environ['discord_prefix']
-TOKEN = os.environ['discord_token']
-WEATHER_API_KEY = os.environ['open_weather_map_key']
-NASA_API_KEY = os.environ['nasa_api_key']
+BOT_PREFIX = '>'
+# TOKEN = os.environ['discord_token']
+# WEATHER_API_KEY = os.environ['open_weather_map_key']
+# NASA_API_KEY = os.environ['nasa_api_key']
 
 bot = commands.Bot(command_prefix=BOT_PREFIX)
 
@@ -30,6 +30,7 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 # Commands
-from commands import *
+import commands
 
-bot.run(TOKEN)
+
+# bot.run(TOKEN)
