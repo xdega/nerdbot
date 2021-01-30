@@ -31,7 +31,7 @@ async def on_ready():
 
 
 # Commands
-import commands
+from commands import *
 
 
 bot.run(TOKEN)
