@@ -27,5 +27,4 @@ async def weather(ctx, zipcode):
         emojistr = emojistr.get(code, '')
     else:
         emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
-        
     await ctx.send(f"**The Weather for {station} is:** {forecast} {emojistr}")
