@@ -1,8 +1,8 @@
+@bot.command(pass_context=True)
 async def weather(ctx, zipcode):
-    """ Gets the current weather for given US zip code """
+    # Gets the current weather for given US zip code
     url = 'https://api.openweathermap.org/data/2.5/weather?'
-    url += f"zip={zipcode}"
-    url += f"&appid={WEATHER_API_KEY}"
+    url += f"zip={zipcode}&appid={WEATHER_API_KEY}"
 
     response = requests.get(url)
     response = response.json()
@@ -27,5 +27,4 @@ async def weather(ctx, zipcode):
         emojistr = emojistr.get(code, '')
     else:
         emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
-
     await ctx.send(f"**The Weather for {station} is:** {forecast} {emojistr}")
