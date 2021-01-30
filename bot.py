@@ -30,6 +30,6 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 # Commands
-import commands
+from commands import *
 
 bot.run(TOKEN)
