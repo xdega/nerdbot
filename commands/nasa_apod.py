@@ -9,4 +9,4 @@ async def nasa_apod(ctx):
     photo = response['url']
     title = response['title']
 
-    await ctx.send(f"** Description: **{title}\n{photo}")
+    await ctx.send(f"**Description:** {title}\n{photo}")
