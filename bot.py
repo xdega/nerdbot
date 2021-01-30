@@ -30,8 +30,6 @@ async def on_ready():
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
 # commands
-for file in os.listdir('commands'):
-    @bot.command(pass_context=True)
-    exec(f"commands/{file}")
+import commands
 
 bot.run(TOKEN)
