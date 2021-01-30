@@ -29,7 +29,9 @@ async def on_ready():
     activity = discord.Game(name=f"{BOT_PREFIX}help", type=discord.ActivityType.watching)
     await bot.change_presence(status=discord.Status.online, activity=activity)
 
+
 # Commands
 import commands
+
 
 bot.run(TOKEN)
