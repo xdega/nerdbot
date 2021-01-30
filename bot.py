@@ -6,7 +6,7 @@ from random import randint
 # External packages (pip)
 import requests
 import discord
-import discord.ext
+import discord.ext as bot_ext
 
 BOT_PREFIX = os.environ['discord_prefix']
 TOKEN = os.environ['discord_token']
@@ -14,7 +14,7 @@ WEATHER_API_KEY = os.environ['open_weather_map_key']
 NASA_API_KEY = os.environ['nasa_api_key']
 # BOT_PREFIX = '>'
 
-bot = discord.ext.commands.Bot(command_prefix=BOT_PREFIX)
+bot = bot_ext.commands.Bot(command_prefix=BOT_PREFIX)
 
 # Remove default help command
 bot.remove_command('help')
