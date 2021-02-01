@@ -8,4 +8,4 @@
 
 **weather [zip code]:** Displays the current weather for the specified U.S Zip Code.
 
-**roll:** Rolls Royce the dice to generate a random number between 1-100.
+**roll:** Rolls the dice to generate a random number between 1-100.
