@@ -8,11 +8,12 @@ class Roll(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        print("Loading Command: Roll")
 
     # Events
     @commands.Cog.listener()
     async def on_ready(self):
-        print("Loading Command: Roll.")
+        print("Bot is Ready")
 
     # Commands
     @commands.command()
@@ -24,3 +25,4 @@ class Roll(commands.Cog):
 
 def setup(client):
     client.add_cog(Roll(client))
+    print("Added Command: Roll")

@@ -2,10 +2,8 @@ import os
 import discord
 from discord.ext import commands
 
-# TODO: These could probably be factored into a settings file
-#TOKEN = os.environ['discord_token']
-BOT_PREFIX = os.environ['discord_prefix']
-#BOT_PREFIX = '>'
+TOKEN = os.getenv("discord_token")
+BOT_PREFIX = os.getenv("discord_prefix", ">")
 
 # TODO: These Env variables should be moved to their respective cog files
 # WEATHER_API_KEY = os.environ['open_weather_map_key']
@@ -25,4 +23,8 @@ for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
         client.load_extension(f"cogs.{filename[:-3]}")
 
-client.run(TOKEN)
+# Run the bot if a TOKEN is provided
+if TOKEN:
+    client.run(TOKEN)
+
+print("End of File: bot.py")
