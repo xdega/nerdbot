@@ -1,36 +1,30 @@
-""" Discord Bot, with a collection of various nerdy commands. """
-# System imports
 import os
-from random import randint
-
-# External packages (pip)
-import requests
 import discord
 from discord.ext import commands
 
-BOT_PREFIX = os.environ['discord_prefix']
-TOKEN = os.environ['discord_token']
-WEATHER_API_KEY = os.environ['open_weather_map_key']
-NASA_API_KEY = os.environ['nasa_api_key']
-# BOT_PREFIX = '>'
+TOKEN = os.getenv("discord_token")
+BOT_PREFIX = os.getenv("discord_prefix", ">")
 
-bot = commands.Bot(command_prefix=BOT_PREFIX)
+# TODO: These Env variables should be moved to their respective cog files
+# WEATHER_API_KEY = os.environ['open_weather_map_key']
+# NASA_API_KEY = os.environ['nasa_api_key']
 
-# Remove default help command
-bot.remove_command('help')
+client = commands.Bot(command_prefix=BOT_PREFIX)
 
-@bot.event
+
+@client.event
 async def on_ready():
-    """ Startup Procedure """
-    print('Logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
-    print('------')
-    activity = discord.Game(name=f"{BOT_PREFIX}help", type=discord.ActivityType.watching)
-    await bot.change_presence(status=discord.Status.online, activity=activity)
+    activity = discord.Game(
+        name=f"{BOT_PREFIX}help",
+        type=discord.ActivityType.watching)
+    await client.change_presence(status=discord.Status.online, activity=activity)
 
+for filename in os.listdir("./cogs"):
+    if filename.endswith(".py"):
+        client.load_extension(f"cogs.{filename[:-3]}")
 
-# Commands
-import bot_commands
+# Run the bot if a TOKEN is provided
+if TOKEN:
+    client.run(TOKEN)
 
-bot.run(TOKEN)
+print("End of File: bot.py")
