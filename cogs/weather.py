@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Roll(commands.Cog):
+class Weather(commands.Cog):
 
     WEATHER_API_KEY = os.environ['open_weather_map_key']
 
