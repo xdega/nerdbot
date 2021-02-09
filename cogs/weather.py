@@ -48,6 +48,7 @@ class Weather(commands.Cog):
             emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
         await ctx.send(f"**The Weather for {station} is:** {forecast} {emojistr}")
 
+
 def setup(client):
     client.add_cog(Weather(client))
     print("Added Command: Weather")
