@@ -47,5 +47,5 @@ class Weather(commands.Cog):
         await ctx.send(f"**The Weather for {station} is:** {forecast} {emojistr}")
 
 def setup(client):
-    client.add_cog(Roll(client))
+    client.add_cog(Weather(client))
     print("Added Command: Weather")
