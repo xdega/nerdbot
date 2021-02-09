@@ -5,6 +5,8 @@ from random import randint
 
 class Roll(commands.Cog):
 
+    WEATHER_API_KEY = os.environ['open_weather_map_key']
+
     def __init__(self, client):
         self.client = client
         print("Loading Command: Weather")
