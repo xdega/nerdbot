@@ -5,7 +5,7 @@ from discord.ext import commands
 
 class Weather(commands.Cog):
 
-    WEATHER_API_KEY = os.environ['open_weather_map_key']
+    WEATHER_API_KEY = os.environ["open_weather_map_key"]
 
     def __init__(self, client):
         self.client = client
@@ -20,7 +20,7 @@ class Weather(commands.Cog):
     @commands.command()
     async def weather(self, ctx, zipcode):
         # Gets the current weather for given US zip code
-        url = 'https://api.openweathermap.org/data/2.5/weather?'
+        url = "https://api.openweathermap.org/data/2.5/weather?"
         url += f"zip={zipcode}&appid={WEATHER_API_KEY}"
 
         response = requests.get(url)
@@ -28,24 +28,24 @@ class Weather(commands.Cog):
 
         print(response)
 
-        forecast = response['weather'][0]['description']
+        forecast = response["weather"][0]["description"]
         forecast = forecast.title()
-        code = response['weather'][0]['id']
-        station = response['name']
+        code = response["weather"][0]["id"]
+        station = response["name"]
 
         if int(code) <= 800:
             code = int(str(code)[:1])
             emojistr = {
-                2: ':thunder_cloud_rain: :fearful:',
-                3: ':white_sun_rain_cloud:',
-                5: ':cloud_rain: :frowning:',
-                6: ':cloud_snow: :snowflake: :snowman:',
-                7: ':foggy: :eyeglasses:',
-                8: ':white_sun_small_cloud: :sunny: :fire:'
+                2: ":thunder_cloud_rain: :fearful:",
+                3: ":white_sun_rain_cloud:",
+                5: ":cloud_rain: :frowning:",
+                6: ":cloud_snow: :snowflake: :snowman:",
+                7: ":foggy: :eyeglasses:",
+                8: ":white_sun_small_cloud: :sunny: :fire:"
             }
-            emojistr = emojistr.get(code, '')
+            emojistr = emojistr.get(code, "")
         else:
-            emojistr = ':cloud: :slight_frown: :cloud: :slight_frown: :cloud:'
+            emojistr = ":cloud: :slight_frown: :cloud: :slight_frown: :cloud:"
         await ctx.send(f"**The Weather for {station} is:** {forecast} {emojistr}")
 
 
