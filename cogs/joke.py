@@ -4,6 +4,7 @@ import requests
 import json
 import time
 
+
 class Joke(commands.Cog):
 
     def __init__(self, client):
@@ -21,9 +22,10 @@ class Joke(commands.Cog):
         joke_api = r"https://official-joke-api.appspot.com/random_joke"
         data = requests.get(joke_api)
         joke_response = json.loads(data.text)
-        await ctx.send(f"{joke_response['setup']}")
+        await ctx.send(f"{joke_response["setup"]}")
         time.sleep(2.5)
-        await ctx.send(f"{joke_response['punchline']}")
+        await ctx.send(f"{joke_response["punchline"]}")
+
 
 def setup(client):
     client.add_cog(Joke(client))
