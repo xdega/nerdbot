@@ -1,8 +1,6 @@
 import discord
 from discord.ext import commands
 
-from random import randint
-
 class Roll(commands.Cog):
 
     WEATHER_API_KEY = os.environ['open_weather_map_key']
