@@ -8,7 +8,7 @@ class Nasa(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.NASA_API_KEY = os.environ['nasa_api_key']
+        self.NASA_API_KEY = os.environ["nasa_api_key"]
 
         print("Loading Command: NASA")
 
