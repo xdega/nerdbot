@@ -5,10 +5,6 @@ from discord.ext import commands
 TOKEN = os.getenv("discord_token")
 BOT_PREFIX = os.getenv("discord_prefix", ">")
 
-# TODO: These Env variables should be moved to their respective cog files
-# WEATHER_API_KEY = os.environ['open_weather_map_key']
-# NASA_API_KEY = os.environ['nasa_api_key']
-
 client = commands.Bot(command_prefix=BOT_PREFIX)
 
 
